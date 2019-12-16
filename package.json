@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "changelog": "github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z JST"
   },
   "repository": {
     "type": "git",
@@ -16,8 +15,5 @@
   "bugs": {
     "url": "https://github.com/keyiiiii/changelog-github-actions/issues"
   },
-  "homepage": "https://github.com/keyiiiii/changelog-github-actions#readme",
-  "dependencies": {
-    "github-changes": "git://github.com/keyiiiii/github-changes.git#no-output-file"
-  }
+  "homepage": "https://github.com/keyiiiii/changelog-github-actions#readme"
 }

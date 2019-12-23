@@ -21,4 +21,6 @@ jobs:
         run: npm install git://github.com/keyiiiii/github-changes.git#no-output-file
 
       - name: Run Changelog
-        run: node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}
+        env:
+          CHANGE_LOG: node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}
+        run: echo "echo $CHANGE_LOG"

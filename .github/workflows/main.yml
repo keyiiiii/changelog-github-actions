@@ -22,5 +22,5 @@ jobs:
 
       - name: Run Changelog
         env:
-          CHANGE_LOG: node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}
+          CHANGE_LOG: `node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`
         run: echo $CHANGE_LOG

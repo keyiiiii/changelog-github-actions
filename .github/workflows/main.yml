@@ -30,7 +30,9 @@ jobs:
 
       - name: Create commit comment
         uses: peter-evans/commit-comment@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ GITHUB_TOKEN }}
           body: |
             '```${{ steps.change_log.outputs.changelog }}```'

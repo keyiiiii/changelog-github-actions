@@ -32,5 +32,5 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            console.log('context', context);
+            console.log('context.payload', context.payload);
             github.issues.createComment({...context.issue, body: '```${{ steps.change_log.outputs.changelog }}```'})

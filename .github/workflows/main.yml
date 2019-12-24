@@ -32,5 +32,5 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             if (context.payload.issue.title.toUpperCase() === 'CHANGELOG') {
-              github.issues.createComment({...context.issue, body: '```${{ steps.change_log.outputs.changelog }}```'})
+              github.issues.createComment({...context.issue, body: '${{ steps.change_log.outputs.changelog }}'})
             }

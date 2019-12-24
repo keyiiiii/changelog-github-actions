@@ -27,12 +27,10 @@ jobs:
       - name: Check output parameter value
         run: |
           echo ${{ steps.change_log.outputs.changelog }}
-      - name: Slack Notification
-        if: always()
-        uses: rtCamp/action-slack-notify@master
-        env:
-          SLACK_CHANNEL: private
-          SLACK_MESSAGE: '```${{ steps.change_log.outputs.changelog }}```'
-          SLACK_TITLE: Changelog
-          SLACK_USERNAME: Changelog bot
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Create commit comment
+        uses: peter-evans/commit-comment@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          body: |
+            '```${{ steps.change_log.outputs.changelog }}```'

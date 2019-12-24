@@ -3,6 +3,9 @@ name: Changelog
 on:
   issues:
     types: opened
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -28,9 +31,8 @@ jobs:
         run: |
           echo ${{ steps.change_log.outputs.changelog }}
 
-      - name: Create commit comment
-        uses: peter-evans/commit-comment@v1
-        env:
-          INPUT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INPUT_BODY: |
-            '```${{ steps.change_log.outputs.changelog }}```'
+      - uses: actions/github-script@0.3.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.createComment({...context.repo, body: '```${{ steps.change_log.outputs.changelog }}```'})

@@ -21,7 +21,7 @@ jobs:
       - name: Run Changelog
         id: change_log
         run: |
-          CHANGE_LOG=`echo -e node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`
+          CHANGE_LOG= echo -e `node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`
           echo -e ::set-output name=changelog::$CHANGE_LOG
 
       - name: Check output parameter value

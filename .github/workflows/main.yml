@@ -35,7 +35,7 @@ jobs:
         env:
           SLACK_CHANNEL: private
           SLACK_ICON: ':+1:'
-          SLACK_MESSAGE: ```${{ steps.change_log.outputs.changelog }}```
+          SLACK_MESSAGE: '```${{ steps.change_log.outputs.changelog }}```'
           SLACK_TITLE: Changelog
           SLACK_USERNAME: Changelog bot
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

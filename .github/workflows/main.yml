@@ -29,3 +29,13 @@ jobs:
       - name: Check output parameter value
         run: |
           echo ${{ steps.change_log.outputs.changelog }}
+      - name: Slack Notification
+        if: always()
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: private
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: ${{ steps.change_log.outputs.changelog }}
+          SLACK_TITLE: Changelog
+          SLACK_USERNAME: Changelog bot
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

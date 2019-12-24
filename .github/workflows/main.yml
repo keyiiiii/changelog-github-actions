@@ -3,9 +3,6 @@ name: Changelog
 on:
   issues:
     types: opened
-  push:
-    branches:
-      - master
 
 jobs:
   build:
@@ -35,5 +32,5 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            console.log('context.issue', context.issue);
+            console.log('context', context);
             github.issues.createComment({...context.issue, body: '```${{ steps.change_log.outputs.changelog }}```'})

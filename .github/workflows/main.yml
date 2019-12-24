@@ -34,7 +34,6 @@ jobs:
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_CHANNEL: private
-          SLACK_ICON: ':+1:'
           SLACK_MESSAGE: '```${{ steps.change_log.outputs.changelog }}```'
           SLACK_TITLE: Changelog
           SLACK_USERNAME: Changelog bot

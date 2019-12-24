@@ -21,11 +21,11 @@ jobs:
       - name: Run Changelog
         id: change_log
         run: |
-          echo -e ::set-output name=changelog::`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`
+          echo "::set-output name=changelog::`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`"
 
       - name: Check output parameter value
         run: |
-          echo -e "${{ steps.change_log.outputs.changelog }}"
+          echo ${{ steps.change_log.outputs.changelog }}
 
       - uses: actions/github-script@0.3.0
         with:

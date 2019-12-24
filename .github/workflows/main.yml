@@ -34,8 +34,8 @@ jobs:
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_CHANNEL: private
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: ${{ steps.change_log.outputs.changelog }}
+          SLACK_ICON: \:+1\:
+          SLACK_MESSAGE: ```${{ steps.change_log.outputs.changelog }}```
           SLACK_TITLE: Changelog
           SLACK_USERNAME: Changelog bot
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

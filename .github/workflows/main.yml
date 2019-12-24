@@ -18,12 +18,20 @@ jobs:
       - name: Install Dependencies
         run: npm install git://github.com/keyiiiii/github-changes.git#no-output-file
 
+      - name: Run Changelog
+        id: change_log
+        run: |
+          CHANGE_LOG=`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`
+          echo -e ::set-output name=changelog::"$CHANGE_LOG"
+          echo -e "$CHANGE_LOG"
+      - name: Check output parameter value
+        run: |
+          echo ${{ steps.change_log.outputs.changelog }}
+
       - uses: actions/github-script@0.3.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             if (context.payload.issue.title.toUpperCase() === 'CHANGELOG') {
-              const changelog = node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}
-              console.log('changelog', changelog);
-              github.issues.createComment({...context.issue, body: `\`\`\`${ changelog }\`\`\``'})
+              github.issues.createComment({...context.issue, body: '```${{ steps.change_log.outputs.changelog }}```'})
             }

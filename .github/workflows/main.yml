@@ -24,7 +24,7 @@ jobs:
 
       - name: Check output parameter value
         run: |
-          echo -e "${ CHANGE_LOG }"
+          echo -e ${ CHANGE_LOG }
 
       - uses: actions/github-script@0.3.0
         with:

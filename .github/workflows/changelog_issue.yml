@@ -5,7 +5,7 @@ on:
     types: [opened, reopened, edited]
 
 jobs:
-  build:
+  changelog:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1

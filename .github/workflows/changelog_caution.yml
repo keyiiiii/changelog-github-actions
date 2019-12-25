@@ -37,7 +37,7 @@ jobs:
           script: |
             const str = '${{ steps.change_log.outputs.changelog }}';
             const pr = str.match(/- \[#/g);
-            if (pr && pr.length > 1) {
+            if (pr && pr.length > 10) {
               return true;
             }
 
@@ -46,7 +46,7 @@ jobs:
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_CHANNEL: private
-          SLACK_MESSAGE: '```${{ steps.change_log.outputs.changelog }}```'
+          SLACK_MESSAGE: '${{ steps.change_log.outputs.changelog }}'
           SLACK_TITLE: Changelog
           SLACK_USERNAME: Changelog bot
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

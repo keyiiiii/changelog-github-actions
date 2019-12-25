@@ -36,5 +36,6 @@ jobs:
           script: |
             if (context.payload.issue.title.toUpperCase() === 'CHANGELOG') {
               const str = ${{ steps.change_log.outputs.changelog }};
+              console.log('str', str);
               github.issues.createComment({...context.issue, body: str.replace(/\r?\n/g, '<br/>')})
             }

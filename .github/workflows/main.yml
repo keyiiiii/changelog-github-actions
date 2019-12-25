@@ -19,19 +19,17 @@ jobs:
         run: npm install git://github.com/keyiiiii/github-changes.git#no-output-file
 
       - name: Run Changelog
-        id: change_log
         run: |
-          CHANGE_LOG="`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`"
-          echo ::set-output name=changelog::$CHANGE_LOG
+          echo "::set-env name=CHANGE_LOG::`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`"
 
       - name: Check output parameter value
         run: |
-          echo -e "${{ steps.change_log.outputs.changelog }}"
+          echo -e "${ CHANGE_LOG }"
 
       - uses: actions/github-script@0.3.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             if (context.payload.issue.title.toUpperCase() === 'CHANGELOG') {
-              github.issues.createComment({...context.issue, body: `${{ steps.change_log.outputs.changelog }}`})
+              github.issues.createComment({...context.issue, body: `${ CHANGE_LOG }`})
             }

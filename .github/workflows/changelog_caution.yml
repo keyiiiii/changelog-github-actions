@@ -24,8 +24,8 @@ jobs:
         run: |
           CHANGE_LOG="`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`"
           echo -e "$CHANGE_LOG"
-          PR_LENGTH=`echo "$CHANGE_LOG" | grep -c '\- \[#[0-9]+\]'`
-          echo "$CHANGE_LOG" | grep -c '\- \[#[0-9]+\]'
+          PR_LENGTH=`echo "$CHANGE_LOG" | grep -c -E '\- \[#[0-9]+\]'`
+          echo "$CHANGE_LOG" | grep -c -E '\- \[#[0-9]+\]'
           echo "$PR_LENGTH"
           echo ::set-output name=prlength::"$PR_LENGTH"
 

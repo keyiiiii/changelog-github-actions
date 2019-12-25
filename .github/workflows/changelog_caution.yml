@@ -26,7 +26,7 @@ jobs:
           echo -e "$CHANGE_LOG"
           echo ::set-output name=changelog::"$CHANGE_LOG"
 
-      - name: Checke output parameter value
+      - name: Checke output parameter value changelog
         run: |
           echo -e "${{ steps.change_log.outputs.changelog }}"
 
@@ -42,6 +42,6 @@ jobs:
               echo ::set-output name=isCaution::true
             }
 
-
-      run: |
-        echo -e "${{ steps.contract.outputs.isCaution }}"
+      - name: Checke output parameter value isCaution
+        run: |
+          echo -e "${{ steps.contract.outputs.isCaution }}"

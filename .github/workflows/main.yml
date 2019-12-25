@@ -22,10 +22,6 @@ jobs:
         run: |
           echo ::set-env name=CHANGE_LOG::`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`
 
-      - name: Check output parameter value
-        run: |
-          echo ${ CHANGE_LOG }
-
       - uses: actions/github-script@0.3.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

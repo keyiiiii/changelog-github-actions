@@ -24,24 +24,20 @@ jobs:
         run: |
           CHANGE_LOG="`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`"
           echo -e "$CHANGE_LOG"
-          echo ::set-output name=changelog::"$CHANGE_LOG"
+          PR_LENGTH=`echo "$CHANGE_LOG" | grep -c -E '\[#[0-9]+\]'`
+          echo ::set-output name=prlength::"$PR_LENGTH"
 
-      - name: Checke output parameter value changelog
+      - name: Checke output parameter value
         run: |
-          echo -e "${{ steps.change_log.outputs.changelog }}"
+          echo -e "${{ steps.change_log.outputs.prlength }}"
 
-      - uses: actions/github-script@0.3.0
+
+      - name: Slack Notification
         if: success()
-        id: contract
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const str = '${{ steps.change_log.outputs.changelog }}';
-            const pr = str.match(/- \[#/g);
-            if (pr && pr.length > 10) {
-              echo ::set-output name=isCaution::true
-            }
-
-      - name: Checke output parameter value isCaution
-        run: |
-          echo -e "${{ steps.contract.outputs.isCaution }}"
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: private
+          SLACK_MESSAGE: '${{ steps.change_log.outputs.prlength }}'
+          SLACK_TITLE: Changelog
+          SLACK_USERNAME: Changelog bot
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

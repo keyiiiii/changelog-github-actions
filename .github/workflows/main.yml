@@ -35,5 +35,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             if (context.payload.issue.title.toUpperCase() === 'CHANGELOG') {
-              github.issues.createComment({...context.issue, body: `${{ steps.change_log.outputs.changelog }}.replace(/\r?\n/g, '<br/>');`})
+              const str = ${{ steps.change_log.outputs.changelog }};
+              github.issues.createComment({...context.issue, body: str.replace(/\r?\n/g, '<br/>')})
             }

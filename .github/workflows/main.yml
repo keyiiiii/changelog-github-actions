@@ -27,7 +27,7 @@ jobs:
 
       - name: Checke output parameter value
         run: |
-          echo ${ step.change_log.outputs.changelog }
+          echo ${ steps.change_log.outputs.changelog }
 
       - uses: actions/github-script@0.3.0
         if: success()
@@ -35,5 +35,5 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             if (context.payload.issue.title.toUpperCase() === 'CHANGELOG') {
-              github.issues.createComment({...context.issue, body: `${{ step.change_log.outputs.changelog }}`})
+              github.issues.createComment({...context.issue, body: `${{ steps.change_log.outputs.changelog }}`})
             }

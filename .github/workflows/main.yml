@@ -21,7 +21,6 @@ jobs:
       - name: Run Changelog
         id: change_log
         run: |
-#          CHANGE_LOG=`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`
           CHANGE_LOG="aaa\r\naaa\r\naaa"
           echo -e "$CHANGE_LOG"
           echo ::set-output name=changelog::$CHANGE_LOG

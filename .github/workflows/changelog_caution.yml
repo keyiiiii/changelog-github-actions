@@ -25,14 +25,14 @@ jobs:
           CHANGE_LOG_MAC="`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`"
           CHANGE_LOG=`echo "$CHANGE_LOG_MAC" | sed s/\n/\r\n/g`
           echo ::set-output name=changelog::"$CHANGE_LOG"
-          echo ::set-output name=changelog_mac::`echo -e $CHANGE_LOG_MAC`
+          echo ::set-output name=changelog_mac::`echo $CHANGE_LOG_MAC`
           PR_LENGTH=`echo -e "$CHANGE_LOG" | grep -c -E '\- \[#[0-9]+\]'`
           echo ::set-output name=prlength::"$PR_LENGTH"
 
       - name: Checke output parameter value
         run: |
-          echo ${{ steps.change_log.outputs.prlength }}
-          echo ${{ steps.change_log.outputs.changelog_mac }}
+          echo "${{ steps.change_log.outputs.prlength }}"
+          echo "${{ steps.change_log.outputs.changelog_mac }}"
 
 
       - name: Slack Notification

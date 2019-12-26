@@ -24,9 +24,10 @@ jobs:
         run: |
           CHANGE_LOG_MAC="`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`"
           echo CHANGE_LOG_MAC "$CHANGE_LOG_MAC"
-          CHANGE_LOG=`$CHANGE_LOG_MAC | sed s/\n/\r\n/g`
+          CHANGE_LOG=`$CHANGE_LOG_MAC`
           echo CHANGE_LOG "$CHANGE_LOG"
           echo ::set-output name=changelog::"$CHANGE_LOG"
+          echo ::set-output name=changelog_mac::"$CHANGE_LOG_MAC"
           PR_LENGTH=`echo -e "$CHANGE_LOG" | grep -c -E '\- \[#[0-9]+\]'`
           echo "$PR_LENGTH"
           echo ::set-output name=prlength::"$PR_LENGTH"
@@ -44,7 +45,7 @@ jobs:
           SLACK_CHANNEL: private
           SLACK_MESSAGE: |
             未リリース分の PR が ${{ steps.change_log.outputs.prlength }} 件溜まってるよ！そろそろリリースしよ？
-            ${{ steps.change_log.outputs.changelog }}
+            ${{ steps.change_log.outputs.changelog_mac }}
           SLACK_TITLE: '警告！'
           SLACK_USERNAME: Changelog bot
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

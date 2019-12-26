@@ -40,8 +40,8 @@ jobs:
         env:
           SLACK_CHANNEL: private
           SLACK_MESSAGE: |
-            '未リリース分の PR が ${{ steps.change_log.outputs.prlength }} 件溜まってるよ！そろそろリリースしよ？'
-            '${{ steps.change_log.outputs.changelog }}'
+            未リリース分の PR が ${{ steps.change_log.outputs.prlength }} 件溜まってるよ！そろそろリリースしよ？
+            "${{ steps.change_log.outputs.changelog }}"
           SLACK_TITLE: '警告！'
           SLACK_USERNAME: Changelog bot
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

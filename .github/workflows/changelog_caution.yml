@@ -34,7 +34,7 @@ jobs:
 
 
       - name: Slack Notification
-        if: ${{ steps.change_log.outputs.prlength }} > 2
+        if: `${{ steps.change_log.outputs.prlength }} > 2`
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_CHANNEL: private

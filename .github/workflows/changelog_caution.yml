@@ -31,7 +31,7 @@ jobs:
 
       - name: Checke output parameter value
         run: |
-          echo -e "${{ github }}"
+          echo -e ${{ github }}
           echo "${{ steps.change_log.outputs.prlength }}"
           echo "${{ steps.change_log.outputs.changelog_mac }}"
 

@@ -24,7 +24,7 @@ jobs:
         run: |
           CHANGE_LOG_MAC="`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`"
           echo CHANGE_LOG_MAC "$CHANGE_LOG_MAC"
-          CHANGE_LOG=`$CHANGE_LOG_MAC`
+          CHANGE_LOG=`echo -e $CHANGE_LOG_MAC | sed s/\n/\r\n/g`
           echo CHANGE_LOG "$CHANGE_LOG"
           echo ::set-output name=changelog::"$CHANGE_LOG"
           echo ::set-output name=changelog_mac::"$CHANGE_LOG_MAC"

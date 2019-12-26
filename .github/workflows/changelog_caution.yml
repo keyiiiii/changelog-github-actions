@@ -30,11 +30,11 @@ jobs:
 
       - name: Checke output parameter value
         run: |
-          echo -e "${{ steps.change_log.outputs.prlength }}"
+          echo ${{ steps.change_log.outputs.prlength }}
 
 
       - name: Slack Notification
-        if: success()
+        if: ${{ steps.change_log.outputs.prlength }} > 2
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_CHANNEL: private

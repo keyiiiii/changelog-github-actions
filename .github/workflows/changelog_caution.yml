@@ -34,11 +34,11 @@ jobs:
 
 
       - name: Slack Notification
-        if: steps.change_log.outputs.prlength > 3
+        if: steps.change_log.outputs.prlength > 2
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_CHANNEL: private
-          SLACK_MESSAGE: '${{ steps.change_log.outputs.prlength }}'
-          SLACK_TITLE: Changelog
+          SLACK_MESSAGE: '${{ steps.change_log.outputs.prlength }} 件溜まってるよ！そろそろリリースしよ？'
+          SLACK_TITLE: '注意！'
           SLACK_USERNAME: Changelog bot
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

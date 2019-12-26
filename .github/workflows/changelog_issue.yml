@@ -21,8 +21,7 @@ jobs:
       - name: Run Changelog
         id: change_log
         run: |
-          CHANGE_LOG_MAC="`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }}`"
-          CHANGE_LOG=`echo "$CHANGE_LOG_MAC" | sed s/\n/\r\n/g`
+          CHANGE_LOG="`node ./node_modules/github-changes -o keyiiiii -r changelog-github-actions -a --only-pulls --use-commit-body --for-tag upcoming -z Asia/Tokyo -k ${{ secrets.GITHUB_TOKEN }} | sed s/\n/\r\n/g`"
           echo ::set-output name=changelog::`echo $CHANGE_LOG`
 
       - name: Checke output parameter value
